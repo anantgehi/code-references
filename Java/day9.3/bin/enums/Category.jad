@@ -1,0 +1,49 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   Category.java
+
+package enums;
+
+
+public final class Category extends Enum
+{
+
+    private Category(String s, int i)
+    {
+        super(s, i);
+    }
+
+    public static Category[] values()
+    {
+        Category acategory[];
+        int i;
+        Category acategory1[];
+        System.arraycopy(acategory = ENUM$VALUES, 0, acategory1 = new Category[i = acategory.length], 0, i);
+        return acategory1;
+    }
+
+    public static Category valueOf(String s)
+    {
+        return (Category)Enum.valueOf(enums/Category, s);
+    }
+
+    public static final Category PETROL;
+    public static final Category DIESEL;
+    public static final Category CNG;
+    public static final Category HYBRID;
+    public static final Category EV;
+    private static final Category ENUM$VALUES[];
+
+    static 
+    {
+        PETROL = new Category("PETROL", 0);
+        DIESEL = new Category("DIESEL", 1);
+        CNG = new Category("CNG", 2);
+        HYBRID = new Category("HYBRID", 3);
+        EV = new Category("EV", 4);
+        ENUM$VALUES = (new Category[] {
+            PETROL, DIESEL, CNG, HYBRID, EV
+        });
+    }
+}
