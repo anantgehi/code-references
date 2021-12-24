@@ -1,0 +1,76 @@
+Today's topics
+1. Complete pending work
+2. Iterator , ListIterator , Exceptions associated.
+3. Sorting in Java
+4. ArrayList Vs LinkedList
+
+
+Revise
+Collection Framework Overview
+What is it ? : Readymade implementation of dynamic data structures(List,Set,Map) + DSA(data structure algorithms) 
+
+Why ? : Supplies readymade implementations of  dynamic data structures. Supports insertion /deletion , searching /sorting , CRUD operations
+
+Inheritance Hierarchy
+(refer to diagram)
+
+Will you be able to create a populated AL(ArrayList<? extends E> Collection c) from
+1. AL , LL , Vector
+2. HS, LHS,TS
+3. HM , LHM ,TM
+Ans : 1, 2
+
+Which of the following will cause a structural modification of the list?(modifying size)
+1. add /addAll
+2. remove / removeAll
+3. retainAll
+4. set
+Ans : 1,2,3
+
+eg : l1 : [1,2,3,4,5]
+l2 : [3,4]
+l1.retainAll(l2) => l1 : [3,4]
+
+What will be o/p ?
+list : [10,20,30,40,50,60]
+for (int i = 0; i < list.size(); i++) {
+ list.remove(i);
+}
+System.out.println("list after remove "+list);//[20,40,60]
+
+
+
+List Features & implementation classes
+
+
+1. Complete pending objectives
+
+1.0 Purchase a Vehicle
+
+1.1 Apply discount to all vehicles manufactured before a specific date n category
+i/p :  date n category n discount
+
+
+1.2  Display vehicle chasis no n price  , of all the vehicles dispatched to a specific city
+i/p : city
+
+2. Create a simple tester to understand :
+Iterator , ListIterator , Exceptions associated.
+
+3. Sorting related objectives
+
+3.1  Sort vehicles as per chasis no (asc order)
+
+3.2  Sort vehicle as per price (desc order)
+
+3.3  Sort vehicles as per date n price 
+
+
+Pending Topics 
+
+Anonymous inner class
+
+5. ArrayList Vs LinkedList
+ 
+
+

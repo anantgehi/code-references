@@ -1,0 +1,87 @@
+1. How to create stream of ints from array?
+java.util.Arrays class method
+public static IntStream stream(int[] array)
+Returns a sequential IntStream with the specified array as its source.
+
+2. How to create stream(sequential) from Collection ?
+Collection i/f method
+public Stream<E> stream()
+
+3.How to create stream(parallel) from Collection ?
+Collection i/f method
+public Stream<E> parallelStream()
+
+
+IntStream Methods
+
+1. public void forEach(IntConsumer action)
+Performs an action for each element of this stream.
+
+Solve : 
+1.Create int[] ---> IntStream & display its contents.
+2. Create AL<Integer> , populate it.
+Convert it to seq stream & display elems
+2.5 Convert it to parallel stream & display elems
+3. Create stream of ints between 1-100 & display all even elements.
+(Hint : IntStream methods --range,filter,forEach)
+4. Create IntStream from a fixed size list (un sorted ) of integers , sort n display it.
+
+4. Display all product names of a particular category , exceeding specific price.
+I/P category name & price.
+(stream,filter,forEach)
+eg : productList : List<Product>
+
+5. Display sum of all even nos between 1-100 .
+
+6. Display average of all even nos between 1-100 .
+
+7.Print avg of odd numbers between 10 & 50 ((if strm is empty print -100 or else print avg)
+(filter,average,optional)
+
+
+
+8. Display sum of product prices of a specific category.
+I/P category name
+o/p sum.
+
+
+
+
+
+8.5 Accept 10 numbers from user & add them to IntStream
+Print if all the numbers are > 20.
+
+
+
+
+8.1 Create Student class -- rollNo(string),name,dob(LocalDate),subject(enum),gpa(double)
+Create Subject enum --JAVA,DBT,ANGULAR,REACT,SE
+Add constr & to string & getters.
+8.2 Create CollectionUtils ---to ret populated FIXED size list of students (4 records)
+
+8.3 Write a tester to print avg gpa of students opted for subject JAVA
+(Hint : filter,map,reduce)
+8.4 Print name of specified subject  topper
+(filter reduce -- max )
+8.5 Print names of  failures for the specified subject chosen  from user.
+(gpa < 5 : failed case)
+
+
+
+8.7 How many distinctions for a specific subject
+(gpa > 7.5 : distinction)
+filter,count
+
+
+Exam objectives 
+Important Facts :
+1. Streams are implicitely closed , after terminal operation (i.e they can't be re used after terminal operation) 
+Otherwise throws --IllegalStateException (reason :stream has already been operated upon or closed)
+Where as , collections are re-usable.
+
+2. Streams follow , vertical execution order.
+
+3. Streams support lazy evaluation (meaning none of the intermediate operations are performed , until its closed by terminal operation)
+
+
+

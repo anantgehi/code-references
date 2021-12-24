@@ -1,0 +1,134 @@
+Today's Topics
+ArrayList Vs LinkedList
+Wild Card in generics & bounds
+Set interface & implementation classes
+
+Revision
+Sorting in Java
+
+Which are 2 ways of sorting in Java ? 
+Natural Ordering : Sorting criteria kept within generic type of the List/Set
+
+
+
+Custom ordering : Sorting criteria kept in separate class / anonymous inner class /lamda expression
+
+
+Sorting elements in the List
+Steps for 1. Sort customer details , as per email (asc) : Use Natural Ordering
+1. public class Customer implements Comparable<Customer> {...}
+
+2. imple method in the Customer class
+@Override 
+public int compareTo(Customer c2)
+{
+//  return this.email.compareTo(c2.email);//asc order
+return c2.email.compareTo(this.email);//desc order
+//c1 : xyz@gmail.com c2 : abc@gmail.com : -1
+}
+
+
+3. java.util.Collections : helper class containing static utility methods
+public static void sort(List<T> list)
+eg : Collections.sort(customers);
+Which sorting algo : Tim's sorting algo (iterative merge sort)
+What will it call internally ? 
+eg : [c1,c2,c3,c4.......c100]
+c1.compareTo(c2) < 0 or 0 : not swapped
+> 0 : swap
+
+
+2. Sort customer details , as per Dob (desc ) n Plan (customer type) : custom ordering , using anonymous inner class.
+
+When u need multiple sorting criteria : that too w/o touching core class (UDT :eg : Customer)
+keep sorting criteria : external 
+Custom ordering
+Steps
+1,2  Either create a separate class or ano inner class that imple : Comparator<T>
+public class CustomerDoBPlanComparator imple. Comparator<Customer>
+{
+  @Override
+  public int compare(Customer c1,Customer c2)
+  {
+ //dob desc
+   int retVal=c2.getDob().compareTo(c1.getDob());
+   if(retVal ==0) //=> Dob is same
+    return c1.getPlan().compareTo(c2.getPlan());
+   return retVal;
+  }
+}
+3. Collections.sort(customers);//N.O
+Collections.sort(customers,null);//N.O
+Collections.sort(customers,new CustomerDoBPlanComparator());//C.O
+JVM (sorting ago) : invokes CustomerDoBPlanComparator's compare method
+
+Sort customer details , as per Dob (desc ) n Plan (customer type) : custom ordering , using anonymous inner class.
+TestCustomer.java 
+
+Collections.sort(customers,new Comparator<Customer>() //instance of the imple class
+{ //ano inner cls begin
+@Override
+  public int compare(Customer c1,Customer c2)
+  {
+ //dob desc
+   int retVal=c2.getDob().compareTo(c1.getDob());
+   if(retVal ==0) //=> Dob is same
+    return c1.getPlan().compareTo(c2.getPlan());
+   return retVal;
+  }
+}//ano inner cls end
+);
+
+.class file : TestCustomers$1
+
+4. LinkedList
+Refer to : Collection Framework Overview diagram.
+diagrams : Types of linked lists , node , insert n delete operations
+Refer to readme
+Solve ready code samples.
+Compare ArrayList Vs LinkedList
+
+
+5. More in generics
+Refer to : generics sequence
+
+6. Java 8 New Features
+
+Java 8 Date/Time related APIs
+Java 8 New Features 
+java.time : new package is introduced
+LocalDate : Date (immutable)(yr-mon-day)  : inherently thrd safe.
+API 
+1. public static LocalDate now()
+Obtains the current date from the system clock in the default time-zone.
+eg : 
+LocalTime : Time (immutable)(hr-min-sec)  : inherently thrd safe.
+LocalDateTime : Date n Time :  inherently thrd safe.
+eg : ???
+2. public static LocalDate of(int year,int month,int dayOfMonth)
+Obtains an instance of LocalDate from a year, month and day.
+eg : ?????
+3. public static LocalDate parse(CharSequence text)
+Obtains an instance of LocalDate from a text string such as 2007-12-03.
+eg : LocalDate dt=parse(sc.next());//0 based dates
+4. Methods :
+isBefore,isAfter,isEqual
+5. Can you change default DateTime format ? : YES
+
+
+6. Enter Sets
+HashSet , LinkedHashSet , TreeSet
+
+7. Hashing Algorithm
+
+5. Enter Sets
+
+Example of strings having same hashcode
+Aa BB
+Ba CB 
+Ca DB
+Da EB
+BBBB AaBB AaAa BBAa
+FB Ea
+
+

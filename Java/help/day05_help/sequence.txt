@@ -1,0 +1,185 @@
+Today's topics
+Continue with inheritance n Polymorphism
+
+
+Revise
+What is inheritance ? IS A , moving from generalization ---> specialization
+Why Inheritance : reducing redundancy n increasing re usability
+Types : single , multi level , hybrid 
+Java follows singl root inh hierarchy
+Universal super class : java.lang.Object
+
+Inheritance type un supported : multiple inheritance
+WHY ? ambiguity 
+
+Discuss Diamond problem
+
+constr invocation in inheritance hierarchy : refer to diag.
+
+super --keyword in java
+
+super keyword usages
+1. To invoke immediate super cls's MATCHING  constr (eg : super(firstName,lastName);) : accessible from sub class constructor
+
+2. To access super cls's accessible members (eg : super.toString())
+
+Important statements
+Sub class IS A super class + something more(addtional data members + methods) + something modified(behaviour : methods : method overriding)
+
+java.lang.Object : universal super class of all java classes
+public String toString() : what does it return : F.Q className @ hex hashCode
+What's the need of overriding toString : to replace "F.Q className @ hex hashCode"  by actual state of the object (non static data members=instance vars)
+
+
+eg : 
+package bank;
+public class Account
+{
+// state : acctNo , name, balance,type : instance vars (=non static data members)
+//constr : 4 args
+public String toString()
+{
+//   sop(super);//compile time err
+sop(super.toString());//no err : hashCode o/p
+  return "Account No "+acctNo"+" balance ="+balance;
+}
+  
+}
+In Tester
+Account a1=new Account(...);
+sop(a1.toString());//what will be o/p ? : uses inherited form from Object : bank.Account@6357567
+sop(a1);//what will be o/p n why ? : same o/p as earlier , WHY : PrintStream : println(Object ref) --> 
+String.valueOf(Object ref) ---> ref==null ? prints null : ref.toString
+
+Is it suitable , if not what is a solution ? : method overriding
+
+
+What will happen , if you write below code in toString() method of Account class ?
+sop(this); : stack overflow
+sop(super);
+------------------------
+1. Revise Person,Student, Faculty , inheritance hierarchy . Complete Faculty class
+
+Objective : Arrange an event to invite students n faculties
+(eg : EventOrganizer app : tester --main / scanner)
+Prompt user for event capacity.
+eg : sop("Enter event capacity");
+Create suitable data structure to hold the participant details
+Person[] participants=new Person[sc.nextInt()];//50
+boolean exit=false;
+int counter=0;
+while(!exit) {
+switch-case
+Options 
+1. Register Student : counter < length
+sop("Enter student dtls : fn ln ......");
+participants[counter++]=new Student(sc.next(),.........);//javac err : NO ERR : impl conversion done by javac : upcasting
+
+2. Register Faculty : 
+3. Display participant details : for-each 
+10. Exit : exit=true
+
+}
+ 
+1.  Upcasting (refer to readme)
+
+IMPORTANT : Javac resolves method binding by type of the reference BUT JVM resolves it by type of the instance it's referring to .
+
+Solve :
+Fruit : super class
+public String taste()
+{
+ return "No specific taste";
+}
+Mango extends Fruit
+{
+ override : to return "sweet"
+}
+Orange extends Fruit
+{
+ override : to return "sour"
++ additional func
+public void juice()
+{
+  sop("extracting orange juice");
+}
+}
+Alphonso extends Mango
+{
+   override : to return"sweet n juicy"
+}
+Apple extends Fruit 
+{
+   override : to return"sweet n sour"
+   //jam 
+   public void jam() 
+   {
+      sop("creating apple jam...");
+   }
+}
+
+
+Solve
+What will happen ?
+Fruit f=new Mango();//no javac err : up casting
+f.taste();//javac err : since Javac chks it by type the ref : i.e it will chk if taste() exists in Fruit class 
+/After adding taste() as a common func, in Fruit class : no javac err. o/p sweet : run time poly.
+
+
+f=new Orange(...);
+f.taste();
+
+
+f=new Alphonso();
+f.taste();
+
+
+Object o=f;//up casting
+sop(o);//hashcode
+o.taste();//javac err : since taste() : doesn't exist in Object class
+((Alphonso) o).taste();//no javac err ---no runtime err ---> sweet n juicy : downcasting
+
+
+Solve :
+
+Fruit f=new Orange();
+f.taste();//sour
+((Orange)f).juice();//no javac err, no runtime err , run time poly  : JVM calls : juice : Orange
+f=new Apple();//no err
+//f.juice();//javac err
+((Orange)f).juice();//no javac err , run time err : java.lang.ClassCastException : Apple can't be cast into Orange
+
+
+
+With simple example : Object , Person , Student,Faculty : refer to Test2.java 
+
+2. Event Organizer app
+ Suitable data structure : array of references : 
+Type of array : Person[]
+
+Menu :
+1 : Register Student
+2. : Register Faculty
+3. Display all participant details 
+100. : Exit
+
+Did it need any downcasting so far ? NO
+
+
+Objective : Executing sub class specific functionality.
+Add a new method "study" in Student class & "teach" in Faculty class
+Option 4 : User i/p : seat no
+Check if seat no is valid .
+In case of valid seat no  --- If it's a Student , invoke study method , if it's a Faculty invoke teach method
+
+4. instanceof keyword
+
+
+-------------------------
+Sample Data
+a1 b1 2020 java 23456 87
+a2 b2 2021 JS 12345 85
+a3 b3 10 java,db,react
+a4 b4 20 java,.NET
+
+

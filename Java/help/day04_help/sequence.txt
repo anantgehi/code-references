@@ -1,0 +1,118 @@
+Today's Topics
+
+Revise with mem pics : array of references
+static keyword
+Enter Inheritance & later Polymorphism.
+
+Revise
+0. Add isEqual method to Point2D class :a boolean returning method : must return true if n only if both points are having same x,y co-ords or false otherwise.
+eg : In TestPoint 
+Point2D p1=new Point2D(sc.nextInt(),sc.nextInt());//10 20
+Point2D p2=new Point2D(sc.nextInt(),sc.nextInt());//10 40
+//non static method added in the point class OR with static method : either in Point class or a separate Utils class
+sop("Points are "+(p1.isEqual(p2)?"SAME":"DIFFERENT"));
+
+Method in Point2D class
+public class Point2D {
+.....
+//isEqual : 
+public boolean isEqual(Point2D anotherPoint)
+{
+//this =p1 , anotherPoint=p2
+   return this.x == anotherPoint.x && this.y == anotherPoint.y;
+} 
+}
+
+
+1. What will be the memory pic  n o/p ?
+Point2D[] points;
+points=new Point2D[3];
+
+int value=10;
+for(int i=0;i<points.length;i++) {
+ points[i]=new Point2D(value,value+10);
+ value++;
+}
+for(Point2D p : points)
+ sop(p.getDetails());
+
+2. What will happen ?
+Point2D[] points=new Point2D[3];
+int value=10;
+for(Point2D p : points) {
+ p=new Point2D(value,value+10);
+ value++;
+}
+for(Point2D p : points)
+ sop(p.getDetails()); //NPExc
+
+3. Dynamic initialization of array of primitive types
+int[] ints= {10,20,30,40,50};
+mem pic pls !
+
+
+4. Dynamic initialization of array of references
+Point2D[] points={new Point2D(10,20),new Point2D(50,100),new Point2D(-50,70)};
+mem pic pls !
+
+
+5. static keyword
+refer to a readme "regarding static"
+
+Q : Emp class 
+Given : class Emp
+{
+ private int id;
+ private String name;
+ private double salary;
+ private static int noOfEmps;
+}
+If 10 emps are hired(i.e 10 emp objects are created , how many copies of the following will be created ?)
+
+id : 10
+name : 10
+salary : 10
+noOfEmps : 1
+
+
+Solve this : Add a static method  isEqual method to Point2D class :a boolean returning method : must return true if n only if both points are having same x,y co-ords or false otherwise.
+public static boolean isEqual(Point2D point1,Point2D point2)
+{
+//point1=p1 , point2=p2
+  return point1.x==point2.x && .....;
+}
+
+How will u invoke above method from Tester ?
+p1 , p2 
+Point2D.isEqual(p1,p2);
+
+
+
+
+6. Understand  static initializer block
+solve ready code sample
+
+
+7. Inheritance 
+refer to "readme inheritance n polymorphism.txt" from today's help.
+
+
+4.1 What is inheritance  n Why 
+4.2 Real life Examples 
+4.3 Types
+4.4 constr invocation in inheritance hierarchy
+super keyword
+Person-Student-Faculty scenario (constructor invocation in inheritance hierarchy)
+4.5 Show details : via toString : method overriding
+
+
+Objective : Arrange an event to invite students n faculties
+
+(eg : EventOrganizer app : tester --main / scanner)
+Prompt user for event capacity.
+Create suitable data structure to hold the participant details
+Options 
+1. Register Student : 
+2. Register Faculty : 
+3. Display participant details : for-each 
+10. Exit

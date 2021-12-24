@@ -1,0 +1,130 @@
+More details about polymorphism
+Abstraction
+Partial n complete
+
+
+Fruit <---Apple,Orange,Mango<---Alphonso
+Suppose taste() exists in a Fruit class , it's overridden in all sub classes
+Suppose toString() is overridden  in Fruit class , also in all sub classes
+Solve
+What will happen ?
+Fruit f=new Mango();//up casting
+f.taste();//no javac err , JVM invokes taste on Mango's instance : run time poly
+sop(f);//f.toString --> Mango's toString : run time poly
+
+f=new Orange(...);//up casting
+f.taste();//no javac err , JVM invokes taste on Orange's instance : run time poly
+sop(f);//f.toString -->Orange's toString : run time poly
+
+
+f=new Alphonso();
+f.taste();
+sop(f);
+
+Object o=f;//up casting
+sop(o);//JVM calls : toString on Alphonso's instance
+
+
+Solve
+Fruit f=new Alphonso();//up casting
+f.Alphonso//juicyPulp() is an additional method on Alphonso : javac err
+//any soln  : down casting : explicitly to be done by prog.
+((Alphonso)f).juicyPulp();//no javac err,no run time err, JVM exec method
+
+f=new Orange(...);//no err
+((Alphonso)f).juicyPulp();//no javac err, run time err : ClassCastExc : Orange can't be cast in to Alphonso
+
+Is there any guard or any way to perform RTTI checking ? 2 ways : 1. instanceof OR 2. Reflection API
+
+How to avoid class cast exc :
+f=new Orange(...);//no err
+if(f instanceof Alphonso)
+((Alphonso)f).juicyPulp();// no err  , method will be called
+else 
+sop("not an Alphonso!!!!!");
+
+o/p : not an Alphonso!!!!!
+
+Important : 
+When will you need to apply downcasting?
+In indirect referencing , i.e when super class ref ---> sub class instance AND it's calling sub class spcific func.
+
+Any probable run time error ?? :  java.lang.ClassCastException
+
+Before down casting : ??? : instanceof checking
+
+Answer this
+
+eg ---Object <----Emp <---Mgr <---SalesMgr
+Object <---- Emp <--- Worker
+
+What will be o/p ?
+Emp e =new Mgr(...);//no err : up casting
+e instanceof Mgr - true
+e instanceof Emp - true
+e instanceof Object - true
+e instanceof SalesMgr  - false
+e instanceof Worker - false
+e=null;
+e instanceof Emp/Mgr/SalesMgr/Worker/Object  -false
+
+
+Tester :
+How will you create a basket of fruits , with 1 apple , 2 alphonso , 1 orange : using dynamic init of array ?(in a single java statment)
+eg : Fruit[] basket={new Apple(....),new Alphonso(.....),new Alphonso(.....),new Orange(....)};//5 , 1 array , 4 different fruits
+
+How will you display tastes of all fruits ?
+for (Fruit f : basket)
+ f.taste();
+----------------------------------------
+
+Enter polymorphism formally : refer to readme inheritance poly.
+
+Refer to method overloading vs method overriding
+
+Identify the rules.
+Examples of method overloading : print / println methods
+
+Example of Method overriding
+eg : toString,taste
+
+Java Annotation
+eg : @Override annotation
+
+
+5. Enter abstraction
+refer : :regarding abstraction"
+
+eg : Shapes scenario
+Solve this
+
+1. BoundedShape -- x,y (state) : tight encapsulation
+ctor : 2 args 
+public double area() : only declaration : enter abstract keyword!
+
+@Override
+public String toString(){...}
+
+2. Circle -- x,y,radius
+Method --public double area()
+public String toString()
+
+3. Rectangle -- x,y,w,h
+Method --public double area()
+public String toString()
+
+eg : In a Tester 
+BoundedShape[] shapes={new Circle(20,40,12.5),new Rectangle(30,40,10,15.7)};
+for(BoundedShape s : shapes)
+{
+  sop(s);//line 1
+  sop(s.area());//line 2
+}
+
+-------------------------
+a1 b1 2020 java 23456 87
+a2 b2 2021 JS 12345 85
+a3 b3 10 java,db,react
+a4 b4 20 java,.NET
+
+

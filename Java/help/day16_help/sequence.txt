@@ -1,0 +1,101 @@
+Today's topics
+
+Intro to Method reference
+Java 8 Functional Streams
+Enter I/O programming
+
+
+Revise 
+1. Can you add default methods in i/f ? YES
+Which keyword is added implicitly by javac ? : public
+
+eg of default keyword
+Iterable i/f
+for internal iteration  : forEach
+
+
+2. What will happen ?
+eg : interface A
+{
+ default void show()
+ {
+   sop("in A's show");
+ }
+}
+ interface B
+{
+ default void show()
+ {
+   sop("in B's show");
+ }
+}
+class C implements A,B {
+  //javac forces imple class to override dup def method
+@Override
+public  void show()
+ {
+   sop("in imple cls' s show");
+   //A.super.show();
+ }
+}
+
+3. Can you add static methods in i/f ?
+Which keyword is added implicitly by javac ? : public 
+
+3. Since Java 8  can you pass behavior directly to a method ? : YES
+Can you return it from the method ? : YES
+What is a higher order function/method ? Method/Func where u can pass or return the behavior .
+Is the following functional i/f : YES
+eg : interface A
+{
+  default void show()
+ {
+   sop("in A's show");
+ }
+   static isEven testMe(int num)
+   {
+     return num % 2 ==0;
+   }
+   double calc(double a,double b);
+}
+eg : class Test
+{
+   void testMe(int c,int d,A ref)
+   {....}
+}
+
+Class Driver 
+{
+    main() {
+      Test t1=new Test();
+      t1.testMe(a,b,(a,b) -> a/b);
+    }
+
+}
+
+-----------------------
+Objectives
+
+
+1. Explore Existing higher order functions(methods)
+Have you solved day15 's lambda expression based assignment ?
+Let's revise / solve it now !
+
+
+1.5 Function literal
+
+
+2. Method references
+refer to "regarding method reference.txt"
+
+3. Using above API(higher order funcs) , can you chain multiple operations like sorting & displaying the sorted data ? NO
+OR
+Filter the elements n display filtered list. 
+Objective : Accept product category from user
+remove all products from specified category n display remaining list
+
+3. Enter Java 8 Streams
+3.1 Refer to <streams> : diagrams
+collections vs streams n streams basics
+3.2 Refer to "streams_sequence"
+----------------------

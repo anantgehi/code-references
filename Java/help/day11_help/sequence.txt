@@ -1,0 +1,103 @@
+Today's topics
+Generics
+Overview of Collection Framework
+Enter List.
+
+1. Generics
+What is it ? : Paramterized types
+Applicable for : classes , interfaces, enums , methods , constrs.
+
+Why ? 
+To Add type safety at the compile time
+1. Avoids explicit type casting
+2. Type mismatch errors are caught at the compile time
+
+
+2. Collection Framework Overview
+
+Enter : List implementation classes : ArrayList
+
+Test basic API using Integer List n then apply it to vehicle showroom scenario.
+
+Objective 
+
+1. Create empty AL to store vehicles in a showroom
+
+2. Accept  vehicle details from user n store it in AL(along with validation rules)
+No dups please !
+
+2.5 After testing vehicle registration in showroom , add sample data to store 5 vehicles in the showroom.
+
+3. Display all vehicle details
+Using for-each & also using Iterator(later)
+
+4. Fetch Vehicle details from AL
+i/p : PK (chasis no)
+o/p : in case of success : display vehicle details o.w throw custom exception
+
+5. Update Vehicle price
+i/p : chasis no & new price
+o/p : in case of success : update vehicle details o.w throw custom exception
+
+
+6. Delete vehicle details
+i/p : chasis no
+
+7. Apply discount to all vehicles manufactured before a specific date n category
+i/p :  date n category n discount
+
+
+8. Display vehicle chasis no n price  , of all the vehicles dispatched to a specific city
+i/p : city
+
+100. Exit
+---------------------------
+Revise
+2 types of nested classes
+1. non static nested class
+(inner class)
+class Outer 
+{
+   private int i;
+   //static n non static members : 
+//can outer class directly access even private memebrs of the inner cls ? 
+   void show()
+   {
+     //how to access j ?
+     
+     
+   }
+   //static method : in outer clas
+   static void print()
+   {
+      //how to access j ?
+   }
+   class Inner {
+ private int j;
+      //can contain only non static members(=non static methods, non static fields,static final fields)
+     // can't contain : static fields, static init blocks, static methods
+     //can inner class methods DIRECTLY(w/o instantiation) access outer's even private methods : 
+     //WHY : every inner class has  implicitly got the ref : Outer.this
+   }
+}
+Can you create directly inner cls instance ? 
+YOu will have to create Outer cls instance n within that can create inner cl instance.
+class Tester
+{
+  psvm(...)
+  {
+    Outer o=new Outer(...);
+    Outer.Inner i=o.new Inner(....);
+   //invoke methods of inner  cls : i.methodName(...)
+    //OR
+    Outer.Innner in2=new Outer(.....).new Inner(....);
+    //invoke methods of inner  cls : in2.methodName(...)
+  }
+}
+----------------------------
+
+sample data
+12342 red 45678 2-6-2021 petrol
+12343 white 45890 2-6-2021 petrol
+12340 black 55678 2-6-2021 petrol
+12347 red 43679 2-6-2021 petrol

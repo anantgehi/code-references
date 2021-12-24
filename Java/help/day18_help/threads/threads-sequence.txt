@@ -1,0 +1,96 @@
+Thread state transitions
+
+
+Thread related API
+1. public interface java.lang.Runnable 
+public void run()
+Must be implemented to supply B.L
+2. public class java.lang.Thread imple. Runnable
+It has imple run() -- blank manner.
+Thread class API
+Constructors of Thread class to be used in "extends Thread " scenario
+1. Thread() -- creates un named thread, in default thread grp. 
+2. Thread(String name) -- creates a  named thread, in default thread grp. 
+eg : public class MyThread extends Thread
+{
+ public MyThread(String nm)
+ {
+    super(nm);//creates a named thrd
+....
+ }
+}
+
+Constructors of Thread in implements scenario
+1. Thread(Runnable instance) --- Creates un named thread.
+instance -- instance of the class which imple Runnable
+
+2. Thread(Runnable instance,String name) --
+Creates named thrd using Runnable's imple class instance.
+eg : public class MyRunnableTask imple Runnable
+{
+   @Override
+   public void run()
+   {....}
+}
+In Tester 
+Thread t1=new Thread(new MyRunnableTask(...),"one");
+Thread class Methods
+1. public void start() --- Transitions the thread from new ---->Rdy-to-run.
+2. public static void yield() -- Requests the scheduler to release processor(so that lower priority threads can access processor). Doesn't release the lock.
+3.public static void sleep(long msec) throws InterruptedException
+4. public static Thread currentThread() -- rets invoker thread ref.
+5. public String toString() --Rets  name of thrd,prio , name of thrd grp
+6. public String getName() , public void setName(String nm)
+7. Priority scale -- 1---10
+Thread class constants -- MIN_PRIORITY(1),MAX_PRIORITY(10),NORM_PRIORITY(5)
+8. public int getPriority() , public void setPriority(int prio)
+9. public boolean isAlive()
+10.public Thread.State getState()
+Thread.State --static nested enum
+constants -- NEW,RUNNABLE,BLOCKED,WAITING,TIMED_WAITING,TERMINATED
+11. public void join() throws InterruptedException
+Causes the invoker thread to block , till specified thrd becomes dead.
+eg : In t1's run() --if u invoke t2.join()
+t1 gets blocked till t2 finishes its exec.
+
+How to ensure "NO Orphans" condition , w/o relying on sleep ?
+eg : In main(...)
+t1.join();
+t2.join();
+t3.join();
+sop("main over");
+
+
+
+
+----------------------
+
+Objective --Test the concurrency 
+Create a class extending from thrd. 
+run() -- add a delay loop.
+Tester --main(..) --create multiple thrds & check.
+----------------------
+
+Regarding method overriding & exc handling
+Overriding form of the method can't throw NEW or BROADER checked exception.
+
+eg :
+ class A
+{
+   void show() {...} throws FileNotFoundException
+}
+ class B extends A
+{
+   @Override
+  public void show() throws Exception
+ {...}
+}
+
+
+
+
+
+
+
+
+

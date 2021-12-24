@@ -1,0 +1,44 @@
+o/p observered : with mandatory branch of the contract (i.e hashCode : 100)
+in hashCode
+Added true
+in hashCode
+in emp equals
+Added true
+in hashCode
+in emp equals
+Added false
+in hashCode
+in emp equals
+in emp equals
+Added true
+in hashCode
+in emp equals
+in emp equals
+in emp equals
+Added true
+in hashCode
+in emp equals
+in emp equals
+in emp equals
+in emp equals
+Added true
+[Emp [id=rnd-001, name=abc, salary=10000.0], Emp [id=rnd-002, name=abc2, salary=20000.0], Emp [id=rnd-009, name=abc4, salary=10000.0], Emp [id=rnd-006, name=abc2, salary=20000.0], Emp [id=rnd-005, name=abc7, salary=10000.0]]
+size 5
+----------------------------
+o/p observered : with mandatory + optional branch of the contract
+in hashCode
+Added true
+in hashCode
+Added true
+in hashCode
+in emp equals
+Added false
+in hashCode
+Added true
+in hashCode
+Added true
+in hashCode
+Added true
+[Emp [id=rnd-006, name=abc2, salary=20000.0], Emp [id=rnd-005, name=abc7, salary=10000.0], Emp [id=rnd-009, name=abc4, salary=10000.0], Emp [id=rnd-002, name=abc2, salary=20000.0], Emp [id=rnd-001, name=abc, salary=10000.0]]
+size 5
+

@@ -1,0 +1,135 @@
+
+Todays's topics 
+I/O Programming
+
+------------------------
+Revise I/O
+Which are  the packages for device handling  ? java.io / java.nio
+java.io : which type of methods ? read / write
+java.io API Blocking or non blocking ? BLOCKING (causes the invoker thread : main , to block until read/write operation is over)
+
+In case or read/write errors : java.io.IOException : checked exc
+
+java.io Consists  of : I/O streams
+What is a stream : data transfer medium (bytes)
+Devices : console(stdin / stdout : System.in : InputStream  / System.out : PrintStream)
+File : File handling streams
+Pipe : pipe handling streams
+Socket : socket strms .....
+
+What will you use ?
+To read data from a data src ----> Java app : input stream
+To write data from a Java app ----> data sink  : output stream
+
+3 different categories of streams --- 
+node streams : device handling streams (meant for abstracting actual device handling from the prog)
+platform independent) : un buffered strms
+eg : FIS, FOS , FR ,FW , PIS,POS,PR,PW...., SIS
+
+buffering streams :  in case large data transfer : independent of the device
+eg : BIS,BR,BOS,BW,PW
+
+Filtering / conversion streams : 
+To convert binary data (bytes) ---> prim types / objects
+eg : DIS,DOS,OOS,OIS...
+
+Which are 2 types of streams in java.io ?
+1. Byte oriented strms
+2. char oriented strms
+
+
+Which are 4 abstract super classes ? : InputStream , OutputStream , Reader , Writer
+
+File Handling Classes ? FIS , FOS , FR , FW
+
+
+
+Objectives : 
+Read data from text file using buffer , till EOF(end of file) n display it : imperative style 
+
+Read data from text file using buffer , till EOF(end of file) n display it : declarative (functional) style 
+
+
+Read data from text file using buffer , till EOF(end of file) , filter lines having  line length > 50  , upper case contents n then display it.
+Hint : BR ---> lines() --> Stream<String> ---> filter : line.length > 50 ---> map : toUpperCase  ---> forEach
+
+Objective : Copy files using buffer.
+i/p : src file name 
+dest file name
+
+Objective : Copy only lines from src file with length > 40 :  using buffer.
+i/p : src file name 
+dest file name
+
+
+
+Objective : Take populated products(list) from sample data.
+Accept product category from user. 
+Filter out the products from the specified category 
+Sort them as per their date
+Save sorted product details in a text file using buffer.
+
+Design 
+1. core classes : Product ...
+2. custom exception
+3. validation rules
+4. CollectionUtils 
+4.1 populate data : all products list
+4.2 Add a static method to return filtered n sorted products to the caller.
+i/p : productList ,category
+o/p : stream OR List(collect)
+
+5. IOUtils
+Add a static method to save product details to the text file : buffered manner
+i/p : stream OR List
+o/p : void
+
+6. Tester
+6.1 get populated data from collection utils
+apply pipeline of ops (call the method!)
+store details
+
+
+
+Enter Binary Streams for file handling
+Which node streams ? FileInputStream , FileOutputStream
+Buffering : BIS , BOS
+
+Need of filtering streams
+
+Objective :Write Java App to accept SINGLE product details from User n store it in a binary file
+Tester : UI
+BinIOUtils : storeDetails(Product p,String fileName) throws ...
+{
+ //Java App   ----->BOS --->   FOS(String fileName) --->        BIn File
+ try(BOS out=new BOS(new FOS(fileName))
+{
+   //prog has to convert product dtsl --> bin
+  //to avoid this : DOS
+}
+}
+
+
+101 bread food 2021-05-19 50
+
+Product [id=101, name=bread, productCatgeory=FOOD, manufactureDate=2021-05-19, price=50.0]
+
+Write Java App to  retrieve product details from bin file n display it .
+
+Which are conversion strms ?
+DataOutputStream n DataInputStream
+
+
+
+
+Objective : Restore product details from a bin file
+Before attaching I/O streams , how to validate if the file exists , regular file , read permission
+API of java.io.File class
+In case of successful validations --attach i/o strms n read data.
+
+
+Object streams
+serialization n de serialization
+Objective 
+Get populated HashMap of Products. Save these product details into bin file
+Restore these details from binary file.

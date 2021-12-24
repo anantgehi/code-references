@@ -1,0 +1,87 @@
+Today's Topics
+overriding of equals method
+Solving bigger assignment (4)
+var-args
+Java Enums
+
+
+1. Solve
+
+String s="Hello";//literal string : string cls loaded meta space , vtable : meta space , in heap : Constant/literal string pool ,literal string gets added in the pool, ref stored in s : stack
+s.toUpperCase();//non literal string : "HELLO" : marked GC
+s.concat("12345");//non literal string : "Hello12345" : marked GC
+sop(s);//Hello
+String s1="testing strings";//literal string , pool : 2 strings, s1---> literal string
+String s2=new String(s1);//non literal string s2 --> non literal string
+sop(s1==s2);//f : ref eq.
+sop(s1.equals(s2));//t : content eq
+String s3="He"+"llo";//s3 ---> earlier created literal string(Hello) , SCP : Hello,testing strings , He,llo,12345
+String s4="He".concat("llo");//anything gets added newly in the pool : no , new non literal "Hello", s4 --> new non literal string
+String s5="hello";//s5 ---> newly created literal string
+sop(s==s3);//true
+sop(s==s4);//false
+sop(s==s5);//false
+
+
+2. Solve
+public static void main(String[] args) {
+		String s1="hello";
+		String s2="hello";
+		String s3=new String(s1);
+		String s4=s3.intern();
+		String s9=new String(s1.toUppercase());
+                           String s10=s9.intern();
+		String s5="he"+"llo";
+		String s6="he".concat("llo"); 
+		System.out.println(s1==s2);
+		System.out.println(s1==s3);
+		System.out.println(s1==s4);
+		System.out.println(s1==s5);
+		System.out.println(s1==s6);
+		String s7=new String("Hello");//how many string objects are created in this line? : 
+		String s8=new String("hello");//how many string objects are created in this line? : 
+
+	}
+
+Revise Date Time Handling
+java.util.Date : represents Date n time both , till precision msec.
+Constrs : 
+Date() : Creates date class instance : current date n time 
+Date(long msec) : Creates date class instance : that represents date n time , of msecs elapsed after Epoch(1st Jan 1970)
+Methods : toString , before ,after,compareTo,equals
+eg : d1.compareTo(d2) :  -1 => d1 before d2
+0 => d1.equals (d2)
+1 => d1 after d2
+
+
+Objective : How to accept manufacture date of a Vehicle ?
+
+
+Steps
+1. Create instance of a class : java.text.SimpleDateFormat
+
+2. Parsing (string --> Date) API 
+
+3. Formatting API (Date --> string) 
+
+---------------------------
+Solve Vehicle's assignment based on equals (revise)
+
+Add More validation rules (solve 2nd assignment)
+
+var-args
+
+Enum : Vehicle Category
+eg : Vehicle HAS-A Category
+
+----------------------------
+
+Sampl data for vehicles
+12345 red 456789 2-10-2021 petrol
+12340 blue 456780 22-10-2021 diesel
+12350 white 456790 2-4-2021 ev
+12347 black 456789 12-8-2021 petrol
+
+
+
+

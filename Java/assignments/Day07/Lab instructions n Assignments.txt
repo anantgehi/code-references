@@ -1,0 +1,456 @@
+Day 1
+1. Refer to "Installation Instructions" from day1-data\day1_help & complete.
+
+2. MUST go through "readme_day1"  from day1-data\day1_help\readmes & day1-data\day1_help\slides\PPTDay1.pdf
+
+3. Go through simple code samples from day1-data\code\src
+
+4. Solve 
+4.1 Accept 2 double values from User (using Scanner). Check data type.
+. If arguments are not doubles , supply suitable error message & terminate.
+If numbers are double values , print its average.
+Hint : Method of Scanner to use : hasNextDouble , nextDouble 
+
+4.2 Display food menu to user. User will select items from menu along with the quantity. (eg 1. Dosa 2. Samosa 3. Idli ... 10 . Generate Bill ) Assign fixed prices to food items(hard code the prices)
+When user enters 'Generate Bill' option(10) , display total bill & exit.
+Hint : 
+psvm(...) {
+sc
+boolean exit=false;
+double totalBill=0;
+while(!exit)
+{
+  sop("Menu : ...");
+  sop("Choose")
+  switch(sc.nextInt())
+  {
+ case 1 : sop("Enter Qty");
+ totalBill += (sc.nextInt()*50);
+ break;
+  case 10 :  sop("Total Bill "+totalBill);
+  exit=true;
+  break;
+  }
+}
+}
+
+OR 
+Create java application for the following
+Accept 2 numbers from user & operation to perform
+1. Add 2.Subtract 3. Multiply 4.Divide 5.Exit
+Display the result of the operation. 
+Java app must continue to run till user chooses exit option.
+
+OR
+Prompt user for how many numbers(double) to accept
+Create suitable data structure to hold these numbers.
+Prompt user to populate the values in data structure
+Display the same.
+Prompt user for option
+1. Double nums
+2. Square nums
+3. Square root nums
+4. Exit
+As per the option , apply this operation on all nums in the data structure
+display the result.
+
+Day 2
+1. Revise class work , to understand : encapsulation n abstraction achieved using class.
+Revise , mem pics n constructor chaining.
+
+2.Solve Tank assignment along with memory picture.
+
+What will be the output ?
+
+class Tank {
+  private int level;
+  Tank(int level)
+   {
+     this.level=level;
+   }
+  public void setLevel(int level)
+  {
+    this.level=level;
+  }
+  public int getLevel()
+  {
+    return this.level;
+  }
+}	
+
+public class Assignment {
+  public static void main(String[] args) {
+    Tank t1 = new Tank(10);
+    Tank t2 = new Tank(20);
+     s.o.p("1: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t1 = t2;
+    s.o.p("2: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t1.setLevel(27);
+     s.o.p("3: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+    t2.setLevel(t1.getLevel()+10);
+     s.o.p("4: t1.level: " + t1.getLevel() +
+          ", t2.level: " + t2.getLevel());
+  }
+}
+
+
+3 . Hands on.
+
+3.1 Create a new folder under your workspace , day2_lab.
+Create sub folders : src n bin
+Copy Box.java under src.
+
+3.2  Add a method (eg : isEqual)  in the  Box class to compare equality of 2 boxes & test it.
+Note  : 2 boxes are equal if & only if , their dimensions are exactly the same.
+eg : If box1 has dims : 10 20 30
+If box2 has dims : 20 10 30
+then method should ret false 
+If dims are exactly same  : it should ret true
+
+Hints : From Tester class (eg TestBoxFunctionality.java)
+If there are 2 boxes : box1 , box2
+Box box1=new Box(10,20,30);
+Box box2=new Box(10,20,31);
+boolean result=box1.isEqual(box2);
+if(result)
+ sop("equal");
+else 
+sop("different");
+OR
+box2.isEqual(box1);
+
+Box.java
+class Box {
+......
+//method declaration
+boolean isEqual(Box anotherBox)
+{//this = box1  anotherBox =box2
+  return this.width == anotherBox.width && this.depth == anotherBox.depth && this.height == anotherBox.height;
+}
+
+
+}
+
+
+
+
+
+How will you invoke the method :
+box1.isEqual(box2) OR box2.isEqual(box1)
+
+
+Now you think about , how will you define this method in the Box class ????
+Box class
+.....
+method declaration
+//box1.isEqual(box2)  ---- this =box1 , anotherBox=box2
+//box2.isEqual(box1) --- this =box2 , anotherBox =box1
+boolean isEqual(Box anotherBox)
+{
+   .......
+}
+
+3.3 Add a method to Box class to return a new Box with modified offset in dimensions & test it with the tester.
+eg : Suppose client has ordered 1st Box : 10 20 30
+Clnt orders another new box : with ref to 1st box , with offsets in the dims as :  3 -4 -2
+App  should create another NEW BOX :13 16 28
+
+Hint : First think about , how will you call it from a tester ?
+Box box1=new Box(10, 20, 30);
+Box nexBox=box1.createNewBox(3, -4, -2);
+
+n then think about adding the method
+Box class
+method declaration
+Box createNewBox(double wOffset,double dOffset,double hOffset)
+{
+   ......
+}
+
+3.4 Display color of the box , having larger volume.
+Box box1=....  600,green
+Box box2=...    768 , red
+o/p : red
+
+Hint : Do you need any additional state in Box class ? : Yes : private String color;
+Any new ctor ? YES : 4 args ---> ctor chaining
+
+Any new methods required ? : YES : getColor
+
+
+4. If time permits , (otherwise we will solve it tomorrow !)
+solve ready code questions from : day2-data\day2_help\params_passing
+TestParamPassing1 & TestParamPassing2
+
+Day 3
+1. Complete pending work , if required with lab faculty's help
+
+2. Refer to "day3-data\code\day3.1" , project to revise , packages , access specifiers n setting of classpath . (along with the readmes)
+
+3. import "day3-data\code\day3.2" , eclipse project in your workspace , to revise array of primitive types n array of references.
+
+4. Hands on
+ 
+4.1 Create a class Point2D , in package - "com.app.geometry"   : for representing a point in x-y co-ordinate system.
+
+4.2 Create a parameterized constructor to init x & y co-ords.
+
+4.3 Add a method to return string form of  point's x & y co-ords
+Hint :  public String getDetails()) 
+
+4.4 Add isEqual method to Point2D class :a boolean returning method : must return true if n only if both points are having same x,y co-ords or false otherwise.
+
+Hint : p1.isEqual(p2) : from the Tester 
+method declaration 
+
+
+4.5 Add calculateDistance method to calculate distance between current point and specified point & return the distance to the caller.
+Hint : Use distance formula . Use java.lang.Math class methods --sqrt, pow etc.
+Hint : How will you call it from the tester ?
+p1=123456 , p2=345678 --plotted
+p2.calculateDistance(p1) 
+
+In Point2D : 
+method declaration : 
+
+public double calculateDistance(Point2D anotherPoint)
+{
+  //this =p2 , anotherPoint=p1
+  return Math.sqrt(.....);
+}
+
+4.6 Write TestPoint class , in package "tester" , with a main method
+Accept co ordinates of 2 points from user (Scanner) --to create 2 points (p1 & p2)
+
+4.7 Use getDetails method to display point details.(p1's details & p2's details)
+
+4.8 Invoke isEqual & display if points are same or different (i.e p1 & p2 are located at the same position)
+
+4.9 If they are not located at the same position , display distance between p1 & p2 , otherwise simply give a message : "points at the same position"
+
+
+4.10 If time permits...
+Create another  class , in the "tester" package "TestPointArray" , with main(..)
+Ask user , how many points to plot. :
+Hint :
+sop("how many points to plot?");//10
+//array : array of ref of type Point2D[] points =......
+Accept x,y co-ordinates for all the points n store it suitably.
+for-loop -- create instance of Point2D , add it's ref in the array.
+Display x,y co-ordinates of all the points plotted so far.
+for-each : getDetails
+
+5. Optional assignment.
+Continue with earlier created Box.java.
+Ask user(client) , how many boxes to make ?
+Accept Box dims for these boxes.
+Store these details suitably.
+Double box width for all boxes having volume > 100.(MUST USE for-each & solve this)
+
+
+Day 4
+1. complete all pending work.
+2. import day4.1 to revise static keyword.
+
+3. import day4.2 to revise inheritance n polymorphism(method overriding)
+3.1 Do complete revision of constructor invocation in the inheritance hierarchy
+3.2 Revise from javadocs , Object class's toString method.
+What does it return ?
+3.3 What is the need of overriding(modifying) toString ?
+3.4 How do you do it ?
+
+4. Solve 
+2.1 Create new project day4_assignments . Copy Day3's Point2D class n then continue.
+Create a new tester in package "com.tester" : TestPointArray2
+Prompt user , how many points to plot?
+Create suitable data structure.  , to store Point2D type of references.
+
+2.2 Add a menu , Run the application till user chooses option 5 (exit)
+
+1 Plot a new point
+I/P --index , x & y
+
+2 Display all points plotted so far. (Use for-each)
+
+
+3. Test equality of 2 points
+I/P : index1 , index 2
+
+4. Calculate distance
+I/P strt , end point indexes.
+
+
+5. Exit
+
+Note : Boundary condition checking & null checking is expected.
+(Meaning : if user supplies invalid index , then give error message : invalid index --out of range
+If no point is plotted at user specified index , then give error message : invalid index -- no point plotted here.)
+
+5. Time permitting solve : 
+Apply inheritance  to emp based organization scenario.
+
+Create Emp based organization structure --- Emp , Mgr , Worker
+All of above classes must be in package--com.app.org
+
+5.1 Emp state--- id(int), name, deptId(string) , basic(double)
+emp id must be system generated using auto increment.
+
+Behaviour ---1.  get emp details -- use toString.
+
+
+5.2 Mgr state  ---id,name,basic,deptId , perfmonceBonus
+Behaviour ----1. get mgr details :  override toString. 
+2. get performance bonus. 
+
+
+5.3 Worker state  --id,name,basic,deptId,hoursWorked,hourlyRate
+Behaviour--- 
+1. get worker details -- :  override toString.
+2. get hrlyRate of the worker  -- add a new method to return hourly rate of a worker.(getter)
+
+Can you organize these classes in inheritance  hierarchy.
+
+5.4 Write TestOrganization1 in "tester" package.
+1. Hire 1 manager n 1 worker. Accept details from user.
+Display complete details.
+
+
+Day 5
+1. Complete pending work , with the help of lab faculty.
+
+2. Revise : inheritance , run time polymorphism , up casting , downcasting n instanceof checking, using readmes n code samples
+(import day5.1 n revise completely)
+
+2.1 Refer to today's sequence n read about Fruits hierarchy. Understand or still better confirm it completely.
+
+3. Completely Optional work : 
+
+
+3.1 Can you arrange Fruit,Apple,Orange,Mango in inheritance hierarchy ?
+Use tight encapsulation.
+
+3.2 Properties (instance variables)  : color : String , weight : double , name:String, fresh : boolean
+
+3.3 Add suitable constructors.
+
+3.4 Override  toString correctly to return state of all fruits (including only : name ,color , weight )
+
+3.5 Add a taste() method : public String taste()
+
+For Fruit : it should return "no specific taste"
+Apple : should return  "sweet n sour"
+Mango : should return  "sweet"
+Orange : should return  "sour"
+
+Add specific functionality , in the sub classes
+In Mango : public void pulp() {Display name n color of the fruit : creating  pulp!}
+In Orange : public void juice() {Display name n weight of the fruit : extracting juice!}
+In Apple : public void jam() {Display name of the fruit : making jam!}
+
+3.6 Add all of above classes under the package "com.app.fruits"
+3.7 Create java application FruitBasket , with main method , as a tester
+3.8 Prompt user for the basket size n create suitable data structure
+3.9 Supply options
+1. Add Mango
+2. Add Orange
+3. Add Apple
+NOTE : You will be adding a fresh fruit in the basket , in all of above options.
+4. Display names of all fruits in the basket.
+5. Display name,color,weight , taste of all fresh fruits , in the basket.
+eg : for-each , null checking --toString , taste, isFresh : getter
+6. Mark a fruit as stale
+i/p : index 
+o/p : error message (in case of invalid index) or mark it stale
+7. Mark all sour fruits stale (optional)
+8. Invoke fruit specific functionality (pulp / juice / jam)
+i/p : index
+Invoke correct functionality (pulp / juice / jam)
+
+100. Exit 
+
+Day 6
+1. Complete pending working , including optional assignments
+
+2. Apply abstraction to Day5's fruits scenario. Can you ?
+
+3. Solve ready code samples , to understand : method overloading n covariance.
+
+4. Continue with Day4' s emp scenario.
+Create Emp based organization structure with :  Emp , Mgr , Worker
+All of above classes must be in package--com.app.org
+
+4.1 Emp state--- id(int), name, deptId(string) , basic(double)
+Emp id should NOT be accepted from user. It should be auto generated , in auto incremented manner
+Hint : add static data member : idGenerator
+Inc it n assign it to emp id : in emp class ctor.
+(emp ids should be starting from 100 onwards. Use static init block)
+
+Get emp details -- using overriding form of toString
+
+4.2 Mgr state  ---id,name,basic,deptId , performanceBonus
+
+Behaviour ----1. get mgr details : via toString
+2. compute net salary (formula: basic+perfmonceBonus) 
+3. get performance bonus. 
+
+4.3 Worker state  --id,name,basic,deptId,hoursWorked,hourlyRate
+Behaviour--- 
+1. get worker details -- via toString
+2.  compute net salary (formula:  = basic+(hoursWorked*hourlyRate) 
+3. get hrlyRate of the worker  -- add a new method to return hourly rate of a worker.(getter)
+
+Can you organize these classes in inheritance  hierarchy n apply abstraction ?
+
+4.4 Write TestOrganization in "tester" package.
+Create suitable array to store organization details.
+
+Provide following options. Run the application till "exit"
+
+1. Hire Manager
+
+2. Hire Worker  
+
+3. Display information of all employees , including net salary using single for-each loop.
+Display from the same for-each loop, performance bonus if it's a manager or if it's a worker , display hourly rate of the worker .
+
+4. Update basic salary
+i/p : emp id &  increment in basic component of salary
+o/p : In case of invalid emp id , give suitable error message. Otherwise , increment the salary.
+
+5.  Exit
+
+Day 7
+1. Complete pending assignments
+
+2. Revise class work
+2.1 Import day7.1 , to revise interfaces.
+2.2 Import day7.3 , to revise exception handling.
+
+3. Create Java application for fixed stack & growable stack based on Stack i/f , for storing emp details
+
+Steps
+1.1  Create Employee class -- id,name,salary, constructor,toString
+1.2 Stack interface -- push & pop functionality for Emp refs. & declare STACK_SIZE as a constant. 
+1.3 Create implementation class of Stack i/f -- FixedStack (array based)
+1.4 Create another implementation class of Stack i/f-- GrowableStack (array based)
+
+1.5
+Create Tester class (Hint :  use dynamic method dispatch using interfaces)
+Display Menu
+Note : Must use 1 switch-case only. You won't need any complex nested control structure
+Once user selects either fixed or growable stack , user shouldn't be allowed to change the selection of the stack.
+
+1 -- Choose Fixed Stack
+2 -- Choose Growable Stack
+Accept following options only after initial selection
+3 -- Push data 
+I/P : Accept emp details & store these details in the earlier chosen stack or give error mesg : NO stack chosen !!!
+In case user has chosen fixed stack , n stack is full give err mesg. 
+In case of growable stack , should be able to save emp details w/o getting err.
+
+4 --- Pop data & display the same (from the earlier chosen stack or give error mesg : NO stack chosen !!!)
+No inputs are required : pop emp details from the top of the stack
+5 -- Exit

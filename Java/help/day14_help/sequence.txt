@@ -1,0 +1,85 @@
+Today's Topics
+
+Hashing algorithm
+LinkeHashSet & TreeSet
+Java 8 Date/Time Handling API
+Map i/f & implementation classes
+
+
+1.Revise Sets overview
+(refer to diagram : "Regarding Sets.png")
+
+2. HashSet & hashing algorithm
+
+Any problems observed in TestStringSet ?
+Any problems observed in EmpSet ?
+
+Solution
+
+
+What is hashing ?
+Hashing means using some function or algorithm to map object data to some representative integer value.
+
+
+Objective : Emp : PK : composite PK
+id (int) n deptId (string)
+Emps are same iff : id n deptId is same
+
+3. LinkedHashSet & TreeSet
+
+
+4. Java 8 Date/Time related APIs
+Java 8 New Features 
+java.time : new package is introduced
+LocalDate : Date (immutable)(yr-mon-day)  : inherently thrd safe.
+API 
+1. public static LocalDate now()
+Obtains the current date from the system clock in the default time-zone.
+eg : 
+LocalTime : Time (immutable)(hr-min-sec)  : inherently thrd safe.
+LocalDateTime : Date n Time :  inherently thrd safe.
+eg : sop("curnt date "+now());
+2. public static LocalDate of(int year,int month,int dayOfMonth)
+Obtains an instance of LocalDate from a year, month and day.
+eg : ?????
+3. public static LocalDate parse(CharSequence text)
+Obtains an instance of LocalDate from a text string such as 2007-12-03.
+eg : LocalDate dt=LocalDate.parse(sc.next());//0 based dates
+4. Methods :
+isBefore,isAfter,isEqual
+5. Can you change default Date format ? : YES
+
+6. Computing Age
+
+
+5. Enter Maps
+Maps Overview
+Refer to Map API
+
+Objective : 
+
+5.1Store a/c details in a suitable map to ensure const time performance for : put/get/remove...
+What will the type of the map ? : HashMap<K,V>
+K : acct no (int) ---> Integer
+V : Account details (BankAccount)
+eg : HashMap<Integer,BankAccount>
+
+5.2  Create a populated map with sample data.
+
+5.3 Create A/C
+
+5.4 Display details of all accts
+
+5.6  Get A/C summary
+
+5.7 Funds Transfer
+
+5.8 Close A/C 
+----------------------------
+Example of strings having same hashcode
+Aa BB
+Ba CB 
+Ca DB
+Da EB
+BBBB AaBB AaAa BBAa
+FB Ea

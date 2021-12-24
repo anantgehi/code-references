@@ -1,0 +1,42 @@
+Objective
+1.Accept name of text file from user(scanner)
+Read data from the file till EOF , in a buffered manner, display the same.
+
+
+2. Accept src & dest text file names.
+File copy in buffered manner.
+Java App<-----BufferedReader<-----FileReader---- Text File
+BR br=new BR(new FR(sc.nextLine());
+Java App ----> BufferedWriter  ---> FW --> Dest Text File
+Triggers for writing data --> device: buf full / flush() / close()
+
+Java App ----> PrintWriter  ---> FW --> Dest Text File
+Triggers for writing data --> device: buf full / flush() / close() + auto flush (flush upon new line)
+PW pw=new PrintWriter(new FileWriter(sc.nextLine(),true),true));
+
+3. Objectve : Store vehicle's data added in a HashMap , into a text file , using buffer.
+
+
+
+Enter Binary I/O
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
