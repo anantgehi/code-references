@@ -20,9 +20,11 @@ public class TestEmpSet {
 		//incase of emp class hash set is not identifying duplicates
 		//hash set is overriding object's equals method which follows reference equality hence it is failing here to identify duplicates
 		//supply overridden equals method with emp id as pk
+		//only equals method is not enough, we alos need to match hashcodes
 		
 		System.out.println(emps);//[...]
-		System.out.println("size "+emps.size());//3
+		System.out.println("size "+emps.size());//3 when eqquals and hashcode methods are not overridden
+		//2 when equals and hashcode methods are overridden
 
 //		System.out.println(e1.equals(e3));//t
 //		System.out.println(e1.hashCode()+" "+e3.hashCode());//same values or different ?
