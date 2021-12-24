@@ -19,6 +19,9 @@ public class Emp {
 		return "Emp [id=" + id + ", name=" + name + ", deptId=" + deptId + ", salary=" + salary + "]";
 	}
 
+	
+	//IDE GENERATED HASHCODE AND EQUALS METHOD
+	
 //	@Override
 //	public int hashCode() {
 //		final int prime = 31;
