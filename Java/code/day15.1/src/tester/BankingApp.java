@@ -19,11 +19,14 @@ public class BankingApp {
 
 	public static void main(String[] args) {
 		try (Scanner sc = new Scanner(System.in)) {
+			
 			// init phase
 			// create suitable D.S
 			HashMap<Integer, BankAccount> accounts = populateMap();
+			
 			boolean exit = false;
 			while (!exit) {
+				
 				System.out.println("Options 1. Create A/C 2. Display 3. Get A/C Summary "
 						+ "4. Transfer Funds 5. Close A/C 6. Display all account details of specific account type "
 						+ "7. Remove all loan accounts10.Exit");
@@ -32,14 +35,15 @@ public class BankingApp {
 					case 1:
 						System.out.println("Enter acct no");
 						int acctNo = sc.nextInt();
+						
 						if (accounts.containsKey(acctNo))
 							throw new BankingException("Dup acct no !!!!!");
+						
 						// => acct no new
-						System.out.println(
-								"Enter a/c details :   acType,  balance,  creationDate(yr-mon-day) customerName");
-						accounts.put(acctNo, new BankAccount(acctNo, valueOf(sc.next().toUpperCase()), sc.nextDouble(),
-								parse(sc.next()), sc.next()));
+						System.out.println("Enter a/c details :   acType,  balance,  creationDate(yr-mon-day) customerName");
+						accounts.put(acctNo, new BankAccount(acctNo, valueOf(sc.next().toUpperCase()), sc.nextDouble(), parse(sc.next()), sc.next()));
 						System.out.println("A/C created....");
+						
 						break;
 					case 2:
 						System.out.println("All A/C Details");
