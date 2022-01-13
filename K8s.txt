@@ -1,0 +1,200 @@
+Kubernetes or  k8s 
+==================
+Kubernetes is a cluster and orchestration engine for docker containers. It is used to manage docker containers in cluster environment.
+
+Cluster - No downtime (Minimal Downtime) / High availibilty >> DRR - 99.9999%
+
+Developed by: Google
+
+Installation Prerquisites to be done on both systems (master & worker node)
+-----------------------------------------------------
+Login as root or sudoer (privilged user)
+
+Sudoer - User with elevated priviliges
+Ques - How to create a sudoer with ALL commands access?
+
+vi /etc/sudoers
+find line --> root ALL=(ALL:ALL) ALL
+tom ALL=(ALL:ALL) ALL
+------------------------------------------------------
+
+Update the systems -> apt-get update && apt-get upgrade (to fetch the latest repositories)
+
+We need to turn off the swap space. This avoids the random errors during K8s installation
+
+Command for doing this is -> 'swapoff -a' and to make things permanent, we can comment(#) the swap partition line(if present) in /etc/fstab (here we can see the filesystem information for all partitions mounted permanently)
+
+##Temp mounts --> mount
+
+Add proper names to the systems. 
+For example - give name 'K8-Master' to master and 'K8-Node' to worker. 'Hint: /etc/hostname'
+Add the name permanently
+
+
+
+Run 'dhclient -v' on both machines after the restart
+
+[root@K8-Master ~ ]#ping K8-Node
+[root@K8-Node ~ ]#ping K8-Master
+
+Turn OFF firewalls (ufw and iptables) and apparmor
+--------------------------------------------------
+root@master:~# service ufw stop
+root@master:~# service ufw status
+● ufw.service - Uncomplicated firewall
+   Loaded: loaded (/lib/systemd/system/ufw.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since Fri 2020-10-09 12:32:39 PDT; 4s ago
+     Docs: man:ufw(8)
+  Process: 10551 ExecStop=/lib/ufw/ufw-init stop (code=exited, status=0/SUCCESS)
+ Main PID: 409 (code=exited, status=0/SUCCESS)
+
+Oct 09 12:32:39 master systemd[1]: Stopping Uncomplicated firewall...
+Oct 09 12:32:39 master ufw-init[10551]: Skip stopping firewall: ufw (not enabled)
+Oct 09 12:32:39 master systemd[1]: Stopped Uncomplicated firewall.
+Warning: Journal has been rotated since unit was started. Log output is incomplete or u
+root@master:~# service apparmor stop
+root@master:~# service apparmor status
+● apparmor.service - AppArmor initialization
+   Loaded: loaded (/lib/systemd/system/apparmor.service; enabled; vendor preset: enable
+   Active: inactive (dead) since Fri 2020-10-09 12:32:54 PDT; 3s ago
+     Docs: man:apparmor(7)
+           http://wiki.apparmor.net/
+  Process: 10583 ExecStop=/etc/init.d/apparmor stop (code=exited, status=0/SUCCESS)
+ Main PID: 434 (code=exited, status=0/SUCCESS)
+
+Oct 09 12:32:54 master systemd[1]: Stopping AppArmor initialization...
+Oct 09 12:32:54 master apparmor[10583]:  * Clearing AppArmor profiles cache
+Oct 09 12:32:54 master apparmor[10583]:    ...done.
+Oct 09 12:32:54 master apparmor[10583]: All profile caches have been cleared, but no pr
+Oct 09 12:32:54 master apparmor[10583]: Unloading profiles will leave already running p
+Oct 09 12:32:54 master apparmor[10583]: unconfined, which can lead to unexpected situat
+Oct 09 12:32:54 master apparmor[10583]: To set a process to complain mode, use the comm
+Oct 09 12:32:54 master apparmor[10583]: 'aa-complain'. To really tear down all profiles
+Oct 09 12:32:54 master apparmor[10583]: with the 'teardown' option."
+Oct 09 12:32:54 master systemd[1]: Stopped AppArmor initialization.
+
+root@master:~# iptables -F
+##Take Snapshots##
+
+%%%%%%%%%%%%
+Installation 
+%%%%%%%%%%%%
+
+Now, Install Docker on both the machines - K8-Master & K8-Node
+
+#apt-get install -y docker.io
+
+Once this is done - we have to install 3 major components of Kubernetes Environment
+kubeadm --> is used for administrating the Kubernetes cluster
+kubectl --> is used for controlling the configurations on various nodes inside the cluster.
+kubelet --> It’s responsible for what’s running on an individual machine. 
+
+Primary repo for Ubuntu systems -> cd /etc/apt/sources.list.d/ or cat /etc/apt/sources.list
+------------------
+root@node:/etc/apt# cat sources.list | grep -v "^#"
+deb http://us.archive.ubuntu.com/ubuntu/ bionic main restricted
+deb http://us.archive.ubuntu.com/ubuntu/ bionic-updates main restricted
+deb http://us.archive.ubuntu.com/ubuntu/ bionic universe
+deb http://us.archive.ubuntu.com/ubuntu/ bionic-updates universe
+deb http://us.archive.ubuntu.com/ubuntu/ bionic multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ bionic-updates multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu bionic-security main restricted
+deb http://security.ubuntu.com/ubuntu bionic-security universe
+deb http://security.ubuntu.com/ubuntu bionic-security multiverse
+-----------------------
+
+Centos or RedHat
+Local repo --> cd /etc/yum.repos.d/ --> Under this all repos will be found - *.repo
+
+------------------------------------------
+Need to run following for updating the apt repo and adding the Kubernetes repo so that the components can be installed smoothly
+
+# apt-get update && apt-get install -y apt-transport-https curl
+# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - #(Every package on google cloud has a hash value SHA:256 hash --> If any malicious user injects the payload/backdoor/virus in this package the has will chnage and it wont match the hash value on google portal - hence the package will be denied)
+# cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+-----
+cd /etc/apt/sources.list.d
+vi kubernetes.list
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+:wq!
+-----
+# apt-get update (we added the kuberenetes repo in above step - so by firing this command we are telling our local repo to update the kubernetes repo)
+
+
+Error while docker installation
+-------------------------------
+root@master:~# apt  install docker.io
+E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+root@master:~# rm -rf /var/lib/dpkg/lock-frontend
+root@master:~# apt  install docker.io
+E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+root@master:~# rm -rf /var/lib/dpkg/lock
+root@master:~# apt  install docker.io
+
+------------------------------------------
+Installing major components of K8s
+#apt-get install -y kubelet kubeadm kubectl 
+
+If this is done successfully - we can check the K8s configuration
+Filepath -> /etc/systemd/system/kubelet.service.d/10-kubeadm.conf (this conf file location might differ)
+
+find / -name "*kubeadm.conf" > to find exact location
+
+[Optional]
+In this file - we can add  the Env variable as follows in the end
+Environment="cgroup-driver=systemd/cgroup-driver=cgroupfs"
+
+Note: All above steps are to be done on both the systems
+
+Now, Kubernetes environment is set up.
+
+
+----------------------------------------------
+Till now we have two machines (master + node) with docker and 3 kubernetes componenets (kubelet kubeadm kubectl) installed on it
+----------------------------------------------
+Master Configurations
+
+a) Start Kubernetes cluster from the master’s machine.									
+[root@K8-Master ~ ]#kubeadm init --apiserver-advertise-address=<ip-address-of-kmaster-vm> --pod-network-cidr=192.168.0.0/16
+
+Observe the output - it will help us use kubectl from the CLI and join nodes to our cluster
+
+##Important: To verify, if kubectl is working or not >> kubectl get pods -o wide --all-namespaces
+
+If the dns one is pending - get it running as follows:
+kubectl apply -f https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml 
+
+[Optional]
+To get the Dashboard
+====================
+kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+Check if dashboard is running >> kubectl get pods -o wide --all-namespaces
+<dashboard pod should reflect as well now>
+
+and to get dashboards ->> kubectl proxy
+
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+To get token  --> 
+This command will create a service account for dashboard in the default namespace
+#kubectl create serviceaccount dashboard -n default
+
+This command will add the cluster binding rules to your dashboard account
+#kubectl create clusterrolebinding dashboard-admin -n default --clusterrole=cluster-admin --serviceaccount=default:dashboard
+
+This command will give you the token required for your dashboard login
+#kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+
+Copy the token in browser
+
+###Join the worker
+command was given by master
+--------------------------------
+For issues: https://stackoverflow.com/questions/55020845/kubelet-service-main-process-exited-code-exited-status-255-n-a
+--------------------------------
+
